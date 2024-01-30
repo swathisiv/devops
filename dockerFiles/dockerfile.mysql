@@ -1,0 +1,10 @@
+# Use an official MySQL runtime as a parent image
+FROM mysql:8
+
+# Environment variables to configure MySQL
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=forge
+ENV MYSQL_USERNAME=forge
+ENV MYSQL_PASSWORD=
+# Expose the default MySQL port
+EXPOSE 3306

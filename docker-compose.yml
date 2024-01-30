@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  php-app:
+    build:
+      context: .
+      dockerfile: dockerFiles/dockerfile.php
+    ports:
+      - "80:80"
+    networks:
+      - backend
+    depends_on:
+      - mysql-db
+      - redis-cache
+
+  mysql-db:
+    build:
+      context: .
+      dockerfile: dockerFiles/dockerfile.mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: forge
+      MYSQL_USERNAME: forge
+      MYSQL_PASSWORD: ""  
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+  redis-cache:
+    build:
+      context: .
+      dockerfile: dockerFiles/dockerfile.redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+networks:
+  backend:
